@@ -28,11 +28,10 @@ class TradingSessionsRepositoryImpl implements ITradingSessionsRepository {
          var indicatorsOpen = jsonDecode(response.data["chart"]["result"][0]["indicators"]["quote"][0]["open"].toString());
          List<TradingSessionsModel> listTradingSessions = [];
 
-         for(var i = 0;i < timestamp.length; i++) {
+         for(var i = 0;i <= 30; i++) {
             listTradingSessions.add(TradingSessionsModel(dataTrading: timestamp[i].toString(), quotationValue: indicatorsOpen[i]));
          }
-
-         print(listTradingSessions.length);
+ 
          return listTradingSessions;
       } catch (e) {
         rethrow;

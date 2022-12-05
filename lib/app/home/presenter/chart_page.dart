@@ -1,5 +1,6 @@
 ﻿import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:guidemobile/app/home/domain/entities/trading_sessions_entity.dart';
@@ -115,8 +116,7 @@ class ChartPage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    
+    final size = MediaQuery.of(context).size; 
     real = NumberFormat.currency(locale: locale['locale'], name: locale['name']);
     setDados(); 
 
@@ -124,14 +124,14 @@ class ChartPage extends GetView<HomeController> {
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
-          title: const Text("Resultado da variação"),
+          title: const Text("Resultado da variação"), 
         ),
         body: Container(
           height: size.height,
           color: Colors.grey,
           child: Center(
             child: SizedBox(
-              height: size.height / 2,
+              height: size.height / 1.5,
               child: AspectRatio(
                 aspectRatio: 2,
                 child: Stack(

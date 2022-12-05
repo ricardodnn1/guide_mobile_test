@@ -1,4 +1,5 @@
 ﻿import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:guidemobile/app/home/domain/models/trading_sessions_model.dart';
 import 'package:guidemobile/app/home/presenter/chart_page.dart';
@@ -9,7 +10,7 @@ import 'package:intl/intl.dart';
 
 class HomePage extends GetView<HomeController> {
    @override
-   Widget build(BuildContext context) {
+   Widget build(BuildContext context) { 
      return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,

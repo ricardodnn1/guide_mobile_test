@@ -24,8 +24,7 @@ class HomeController extends GetxController with StateMixin {
     Future<void> getAllTrading() async {
       change([], status: RxStatus.loading());
       try {
-        final data = await _repository.getAllTraiding();
-        print(data.length);
+        final data = await _repository.getAllTraiding(); 
         change(data, status: RxStatus.success());
       } catch (e) {
         change([], status: RxStatus.error('Erro ao buscar cotação'));
