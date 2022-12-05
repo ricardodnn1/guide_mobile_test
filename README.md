@@ -1,16 +1,24 @@
-# guidemobile
+# Teste técnico para desenvolvedor mobile Flutter
 
-A new Flutter project.
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=%20TESTE FINALIZADO&color=GREEN&style=for-the-badge)
 
-## Getting Started
+Objetivo do teste: Implementar a consulta da api https://query2.finance.yahoo.com/v8/finance/chart/PETR4.SA e exibir os ultimos 30 pregões. 
 
-This project is a starting point for a Flutter application.
+# :hammer: Funcionalidades do projeto
 
-A few resources to get you started if this is your first Flutter project:
+ - `Funcionalidade 1`: Consulta exibição em lista dos últimos 30 pregões
+ - `Funcionalidade 2`: Exibir gráfico dos últimos 30 pregões
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# :hammer: Arquitetura e padrões utilizado no teste:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ - `1`: Arquitetura limpa (Clean Arch).
+ - `2`: Separação por modulos individuais com injeção de dependências.
+ - `3`: Clean Code (SOLID).
+ 
+ # :hammer: Packages utilizdos:
+ 
+ - `1`: GetX (Injeção de dependências, Gerencia de estado).
+ - `2`: Dio (Requisições HTTP).
+ - `3`: Intl e flutter_localization (Conversão de data e moeda no padrão BR).
+ - `4`: fl_chart (Gerar gráfico).
+ 
