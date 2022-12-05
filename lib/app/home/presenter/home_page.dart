@@ -1,6 +1,7 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:guidemobile/app/home/domain/models/trading_sessions_model.dart';
+import 'package:guidemobile/app/home/presenter/chart_page.dart';
 import 'package:guidemobile/app/home/presenter/controller/home_controller.dart';
 import 'package:guidemobile/shared/utils/extensions.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -22,7 +23,12 @@ class HomePage extends GetView<HomeController> {
              style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black38
              ),
-             onPressed: () {},
+             onPressed: () {
+                Get.to(
+                   ChartPage(),
+                   fullscreenDialog: true
+                );
+             },
              child: const Padding(
                padding: EdgeInsets.all(8.0),
                child: Text("Visualizar Gráfico"),

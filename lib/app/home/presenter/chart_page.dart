@@ -6,7 +6,7 @@ import 'package:guidemobile/app/home/domain/entities/trading_sessions_entity.dar
 import 'package:guidemobile/app/home/presenter/controller/home_controller.dart';
 import 'package:intl/intl.dart';
 
-class CharPageState extends GetView<HomeController> {
+class ChartPage extends GetView<HomeController> {
   List<Color> colors = [
     Color(0xFF3F51B5),
   ];
@@ -27,7 +27,7 @@ class CharPageState extends GetView<HomeController> {
     dataChart = [];
 
     dataComplete = list.reversed.map((e) {
-        double quote = double.parse(e.quotationValue.toString());
+        double quote = e.quotationValue ?? 0;
         return [quote, e.dataTrading];
     }).toList();
 
@@ -103,13 +103,9 @@ class CharPageState extends GetView<HomeController> {
 
    getDate(int index) {
     DateTime date = dataComplete[index][1];
-    // if (periodo != Periodo.ano && periodo != Periodo.total)
-    //   return DateFormat('dd/MM - hh:mm').format(date);
-    // else
-    //   return DateFormat('dd/MM/y').format(date);
+    return DateFormat('dd/MM/y').format(date);
   }
-
-   
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -119,38 +115,44 @@ class CharPageState extends GetView<HomeController> {
     setDados();
 
     return controller.obx((state) {
-      return Container(
-        child: AspectRatio(
-          aspectRatio: 2,
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                     
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 80),
-                child: ValueListenableBuilder(
-                  valueListenable: loaded,
-                  builder: (context, bool isLoaded, _) {
-                    return (isLoaded)
-                        ? LineChart(
-                            getChartData(),
-                          )
-                        : Center(
-                            child: CircularProgressIndicator(),
-                            );
-                    },
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.green,
+          title: Text("Resultado da variação"),
+        ),
+        body: Container(
+          child: AspectRatio(
+            aspectRatio: 2,
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [ 
+                    ],
                   ),
                 ),
-              ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 80),
+                  child: ValueListenableBuilder(
+                    valueListenable: loaded,
+                    builder: (context, bool isLoaded, _) {
+                      return (isLoaded)
+                          ? LineChart(
+                              getChartData(),
+                            )
+                          : Center(
+                              child: CircularProgressIndicator(),
+                              );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
-      });
-    }
-  } 
+      }
+    );
+  }
+} 
