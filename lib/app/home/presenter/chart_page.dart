@@ -17,7 +17,10 @@ class ChartPage extends GetView<HomeController> {
   double maxX = 0;
   double maxY = 0;
   double minY = 0;
-  late Map<String, String> loc;
+  Map<String, String> locale = {
+    'locale': 'pt_BR',
+    'name': 'R\$',
+  };
   late NumberFormat real;
   ValueNotifier<bool> loaded = ValueNotifier(false);
 
@@ -26,9 +29,11 @@ class ChartPage extends GetView<HomeController> {
     var list = await controller.getAllTradingDtChart();
     dataChart = [];
 
+    print(dataChart);
+
     dataComplete = list.reversed.map((e) {
-        double quote = e.quotationValue ?? 0;
-        return [quote, e.dataTrading];
+        double quote = e.quotationValue ?? 0; 
+        return [quote, DateTime.fromMillisecondsSinceEpoch(int.parse(e.dataTrading!) * 1000)];
     }).toList();
 
     maxX = dataComplete.length.toDouble();
@@ -52,7 +57,7 @@ class ChartPage extends GetView<HomeController> {
 
   LineChartData getChartData() {
     return LineChartData(
-      gridData: FlGridData(show: false),
+      gridData: FlGridData(show: true),
       titlesData: FlTitlesData(show: false),
       borderData: FlBorderData(show: false),
       minX: 0,
@@ -63,11 +68,12 @@ class ChartPage extends GetView<HomeController> {
         LineChartBarData(
           spots: dataChart,
           isCurved: true,
-          color: Colors.amber,
-          barWidth: 2,
-          dotData: FlDotData(show: false),
+          colors: colors,
+          barWidth: 1,
+          dotData: FlDotData(show: true),
           belowBarData: BarAreaData(
-            show: true, 
+            show: true,  
+            colors: colors.map((color) => color.withOpacity(0.15)).toList(), 
           ),
         ),
       ],
@@ -80,7 +86,7 @@ class ChartPage extends GetView<HomeController> {
               return LineTooltipItem(
                 real.format(item.y),
                 TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
                 ),
@@ -109,47 +115,53 @@ class ChartPage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-     
+    final size = MediaQuery.of(context).size;
     
-    //real = NumberFormat.currency(locale: loc['locale'], name: loc['name']);
-    setDados();
+    real = NumberFormat.currency(locale: locale['locale'], name: locale['name']);
+    setDados(); 
 
     return controller.obx((state) {
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
-          title: Text("Resultado da variação"),
+          title: const Text("Resultado da variação"),
         ),
         body: Container(
-          child: AspectRatio(
-            aspectRatio: 2,
-            child: Stack(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [ 
+          height: size.height,
+          color: Colors.grey,
+          child: Center(
+            child: SizedBox(
+              height: size.height / 2,
+              child: AspectRatio(
+                aspectRatio: 2,
+                child: Stack(
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: const  [],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 80),
+                      child: ValueListenableBuilder(
+                        valueListenable: loaded,
+                        builder: (context, bool isLoaded, _) {
+                          return (isLoaded)
+                              ? LineChart(
+                                  getChartData(),
+                                )
+                              : const Center(
+                                  child: CircularProgressIndicator(),
+                                  );
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 80),
-                  child: ValueListenableBuilder(
-                    valueListenable: loaded,
-                    builder: (context, bool isLoaded, _) {
-                      return (isLoaded)
-                          ? LineChart(
-                              getChartData(),
-                            )
-                          : Center(
-                              child: CircularProgressIndicator(),
-                              );
-                      },
-                    ),
-                  ),
-                ],
-              ),
             ),
+          ),
           ),
         );
       }
