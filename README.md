@@ -1,7 +1,5 @@
 # Teste técnico para desenvolvedor mobile Flutter
 
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=%20TESTE FINALIZADO&color=GREEN&style=for-the-badge)
-
 Objetivo do teste: Implementar a consulta da api https://query2.finance.yahoo.com/v8/finance/chart/PETR4.SA e exibir os ultimos 30 pregões. 
 
 # :hammer: Funcionalidades do projeto
