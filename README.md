@@ -19,8 +19,3 @@ Objetivo do teste: Implementar a consulta da api https://query2.finance.yahoo.co
  - `2`: Dio (Requisições HTTP).
  - `3`: Intl e flutter_localization (Conversão de data e moeda no padrão BR).
  - `4`: fl_chart (Gerar gráfico).
-<<<<<<< HEAD
- 
-=======
- 
->>>>>>> e34c064d54bd291183419c81762b18e4b6d4a511
