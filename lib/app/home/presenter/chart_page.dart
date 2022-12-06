@@ -30,30 +30,32 @@ class ChartPage extends GetView<HomeController> {
     var list = await controller.getAllTradingDtChart();
     dataChart = [];
 
-    print(dataChart);
+    if(list.length > 0 && list.isNotEmpty) {
+      dataComplete = list.reversed.map((e) {
+          double quote = e.quotationValue ?? 0; 
+          return [quote, DateTime.fromMillisecondsSinceEpoch(int.parse(e.dataTrading!) * 1000)];
+      }).toList();
 
-    dataComplete = list.reversed.map((e) {
-        double quote = e.quotationValue ?? 0; 
-        return [quote, DateTime.fromMillisecondsSinceEpoch(int.parse(e.dataTrading!) * 1000)];
-    }).toList();
+      maxX = dataComplete.length.toDouble();
+      maxY = 0;
+      minY = double.infinity;
 
-    maxX = dataComplete.length.toDouble();
-    maxY = 0;
-    minY = double.infinity;
+      for (var item in dataComplete) {
+        maxY = item[0] > maxY ? item[0] : maxY;
+        minY = item[0] < minY ? item[0] : minY;
+      }
 
-    for (var item in dataComplete) {
-      maxY = item[0] > maxY ? item[0] : maxY;
-      minY = item[0] < minY ? item[0] : minY;
+      for (int i = 0; i < dataComplete.length; i++) {
+        dataChart.add(FlSpot(
+          i.toDouble(),
+          dataComplete[i][0],
+        ));
+      }
     }
 
-    for (int i = 0; i < dataComplete.length; i++) {
-      dataChart.add(FlSpot(
-        i.toDouble(),
-        dataComplete[i][0],
-      ));
+    if(dataComplete.length > 0) {
+      loaded.value = true;
     }
-
-    loaded.value = true;
   }
 
   LineChartData getChartData() {
