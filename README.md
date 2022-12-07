@@ -15,7 +15,7 @@ Objetivo do teste: Implementar a consulta da api https://query2.finance.yahoo.co
  
  # :hammer: Packages utilizdos:
  
- - `1`: GetX (Injeção de dependências, Gerencia de estado).
+ - `1`: GetX (Injeção de dependências, Gerenciamento de estado, Gerenciamento de rotas).
  - `2`: Dio (Requisições HTTP).
  - `3`: Intl e flutter_localization (Conversão de data e moeda no padrão BR).
  - `4`: fl_chart (Gerar gráfico).
