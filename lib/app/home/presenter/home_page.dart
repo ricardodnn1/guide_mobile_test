@@ -1,6 +1,6 @@
-﻿import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+﻿import 'package:flutter/material.dart'; 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:guidemobile/app/home/domain/models/trading_sessions_model.dart';
 import 'package:guidemobile/app/home/presenter/chart_page.dart';
 import 'package:guidemobile/app/home/presenter/controller/home_controller.dart';
@@ -13,21 +13,21 @@ class HomePage extends GetView<HomeController> {
    Widget build(BuildContext context) { 
      return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.black,
         title: const Text('Consulta do ativo PETR4'),
       ),
       bottomNavigationBar: Container(
-        color: Colors.green,
+        color: Colors.black,
         height: 80,
         child: Center(
            child: ElevatedButton(
              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black38
+                backgroundColor: Colors.red
              ),
              onPressed: () {
                 Get.to(
-                   ChartPage(),
-                   fullscreenDialog: true
+                  ChartPage(),
+                  fullscreenDialog: true
                 );
              },
              child: const Padding(
@@ -38,15 +38,25 @@ class HomePage extends GetView<HomeController> {
         ),
       ),
       body: controller.obx((state) {
-        return ListView.builder(
-          itemCount: state.length,
-          itemBuilder: (_, index) {
-            final TradingSessionsModel item = state[index];
-            return ListTile(
-              title: Text(DateFormat('dd/MM/yyyy').format(DateTime.parse(item.dataTrading!.parseDateTime()))),
-              subtitle: Text('Cotação: ${item.quotationValue!.toStringAsFixed(4)}'),
-            );
-          },
+        return Container(
+          padding: EdgeInsets.all(10),
+          child: ListView.builder(
+            itemCount: state.length,
+            itemBuilder: (_, index) {
+              final TradingSessionsModel item = state[index];
+              return Container(
+                margin: EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(8)
+                ),
+                child: ListTile(
+                  title: Text(DateFormat('dd/MM/yyyy').format(DateTime.parse(item.dataTrading!.parseDateTime())), style: GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black)),
+                  subtitle: Text('Cotação: ${item.quotationValue!.toStringAsFixed(4)}', style: GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black)),
+                ),
+              );
+            },
+          ),
         );
       }, onError: (error) {
         return SizedBox(

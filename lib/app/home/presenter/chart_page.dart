@@ -125,7 +125,7 @@ class ChartPage extends GetView<HomeController> {
     return controller.obx((state) {
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.black,
           title: const Text("Resultado da variação"), 
         ),
         body: Container(
