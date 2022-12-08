@@ -16,11 +16,14 @@ class MainWidgetApp extends StatelessWidget {
           title: "Consulta do ativo PETR4",
           name: '/',
           page: () => HomePage(),
-          binding: HomeBindings(),
-          children: [
-           
-          ],
-        )
+          binding: HomeBindings(), 
+        ),
+        GetPage(
+          title: "Consulta do ativo PETR4",
+          name: '/home',
+          page: () => HomePage(),
+          binding: HomeBindings(), 
+        ),
       ],
     );
   }
