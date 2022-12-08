@@ -8,7 +8,7 @@ import 'package:guidemobile/shared/utils/extensions.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:intl/intl.dart';
 
-class TradingQuotePage extends GetView<TradingController> {
+class TradingPage extends GetView<TradingController> {
    @override
    Widget build(BuildContext context) { 
      return Scaffold(

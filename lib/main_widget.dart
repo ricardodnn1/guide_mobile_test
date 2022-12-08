@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:guidemobile/app/home/presenter/home_page.dart';
 import 'package:guidemobile/app/trading_sessions/presenter/trading_chart_page.dart';
 import 'package:guidemobile/app/trading_sessions/trading_sessions_bindings.dart';
-import 'package:guidemobile/app/trading_sessions/presenter/trading_quote_page.dart';
+import 'package:guidemobile/app/trading_sessions/presenter/trading_page.dart';
 
 class MainWidgetApp extends StatelessWidget {
   const MainWidgetApp({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class MainWidgetApp extends StatelessWidget {
         GetPage(
           title: "Consulta do ativo PETR4",
           name: '/quote',
-          page: () => TradingQuotePage(),
+          page: () => TradingPage(),
           binding: TradingSessionsBindings(), 
         ),
         GetPage(
