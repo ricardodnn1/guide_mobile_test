@@ -1,10 +1,10 @@
 ﻿import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:guidemobile/app/home/domain/entities/list_trading_sessions_entity.dart';
-import 'package:guidemobile/app/home/domain/entities/trading_sessions_entity.dart';
-import 'package:guidemobile/app/home/domain/models/trading_sessions_model.dart';
-import 'package:guidemobile/app/home/domain/repository/trading_sessions_repository.dart';
+import 'package:guidemobile/app/trading_sessions/domain/entities/list_trading_sessions_entity.dart';
+import 'package:guidemobile/app/trading_sessions/domain/entities/trading_sessions_entity.dart';
+import 'package:guidemobile/app/trading_sessions/domain/models/trading_sessions_model.dart';
+import 'package:guidemobile/app/trading_sessions/domain/repository/trading_sessions_repository.dart';
 import 'package:guidemobile/shared/constants/endpoint.dart';
 
 class TradingSessionsRepositoryImpl implements ITradingSessionsRepository {

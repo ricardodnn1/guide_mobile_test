@@ -1,4 +1,4 @@
-﻿import 'package:guidemobile/app/home/domain/models/trading_sessions_model.dart';
+﻿import 'package:guidemobile/app/trading_sessions/domain/models/trading_sessions_model.dart';
 
 abstract class ITradingSessionsRepository {
   Future<List<TradingSessionsModel>> getAllTraiding();

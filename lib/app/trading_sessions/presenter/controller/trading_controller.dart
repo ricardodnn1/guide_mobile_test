@@ -3,17 +3,17 @@ import 'dart:ffi';
 
 import 'package:dio/dio.dart';
 import 'package:get/state_manager.dart';
-import 'package:guidemobile/app/home/domain/entities/trading_sessions_entity.dart';
-import 'package:guidemobile/app/home/domain/repository/trading_sessions_repository.dart';
-import 'package:guidemobile/app/home/repository/remote/trading_sessions_repository_impl.dart';
+import 'package:guidemobile/app/trading_sessions/domain/entities/trading_sessions_entity.dart';
+import 'package:guidemobile/app/trading_sessions/domain/repository/trading_sessions_repository.dart';
+import 'package:guidemobile/app/trading_sessions/repository/remote/trading_sessions_repository_impl.dart';
 import 'package:guidemobile/shared/constants/endpoint.dart';
 
-class HomeController extends GetxController with StateMixin {
+class TradingController extends GetxController with StateMixin {
 
     final ITradingSessionsRepository _repository;
     bool loaded = false;
 
-    HomeController(this._repository);
+    TradingController(this._repository);
 
     @override
     void onInit() {

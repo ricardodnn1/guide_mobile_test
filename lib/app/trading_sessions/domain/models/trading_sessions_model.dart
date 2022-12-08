@@ -1,4 +1,4 @@
-﻿import 'package:guidemobile/app/home/domain/entities/trading_sessions_entity.dart';
+﻿import 'package:guidemobile/app/trading_sessions/domain/entities/trading_sessions_entity.dart';
 
 class TradingSessionsModel extends TradingSessionsEntity {
     String? dataTrading;

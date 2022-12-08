@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
-import 'package:guidemobile/app/home/domain/entities/trading_sessions_entity.dart';
-import 'package:guidemobile/app/home/presenter/controller/home_controller.dart';
+import 'package:guidemobile/app/trading_sessions/domain/entities/trading_sessions_entity.dart';
+import 'package:guidemobile/app/trading_sessions/presenter/controller/trading_controller.dart';
 import 'package:intl/intl.dart';
 
-class ChartPage extends GetView<HomeController> {
+class TradingChartPage extends GetView<TradingController> {
   List<Color> colors = [
     Color(0xFF3F51B5),
   ];
