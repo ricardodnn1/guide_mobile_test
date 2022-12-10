@@ -1,14 +1,14 @@
 ﻿import 'package:guidemobile/app/trading_sessions/domain/entities/trading_sessions_entity.dart';
 
 class TradingSessionsModel extends TradingSessionsEntity {
-    String? dataTrading;
-    double? quotationValue;
+   
+    const TradingSessionsModel({ required String dataTrading, required double quotationValue}) : super(dataTrading: dataTrading, quotationValue: quotationValue);
 
-    TradingSessionsModel({this.dataTrading, this.quotationValue});
-
-    TradingSessionsModel.fromJson(Map<String, dynamic> json) {
-        dataTrading = json['dataTrading'];
-        quotationValue = json['quotationValue'];
+    static TradingSessionsModel fromMap(Map<String, dynamic> map) {
+      return TradingSessionsModel(
+        dataTrading: map['dataTrading'],
+        quotationValue: map['quotationValue']
+      );
     }
 
     Map<String, dynamic> toJson() {

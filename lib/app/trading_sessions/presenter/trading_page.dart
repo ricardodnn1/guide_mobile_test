@@ -1,7 +1,7 @@
 ﻿import 'package:flutter/material.dart'; 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:guidemobile/app/trading_sessions/domain/models/trading_sessions_model.dart';
+import 'package:guidemobile/app/trading_sessions/infra/models/trading_sessions_model.dart';
 import 'package:guidemobile/app/trading_sessions/presenter/trading_chart_page.dart';
 import 'package:guidemobile/app/trading_sessions/presenter/controller/trading_controller.dart';
 import 'package:guidemobile/shared/utils/extensions.dart';

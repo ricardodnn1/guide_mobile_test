@@ -8,55 +8,7 @@ import 'package:guidemobile/app/trading_sessions/presenter/controller/trading_co
 import 'package:intl/intl.dart';
 
 class TradingChartPage extends GetView<TradingController> {
-  List<Color> colors = [
-    Color(0xFF3F51B5),
-  ];
   
-   
-  List<FlSpot> dataChart = []; 
-  List dataComplete = [];
-  double maxX = 0;
-  double maxY = 0;
-  double minY = 0;
-  Map<String, String> locale = {
-    'locale': 'pt_BR',
-    'name': 'R\$',
-  };
-  late NumberFormat real;
-  ValueNotifier<bool> loaded = ValueNotifier(false);
-
-  setDados() async {
-    loaded.value = false;
-    var list = await controller.getAllTradingDtChart();
-    dataChart = [];
-
-    if(list.length > 0 && list.isNotEmpty) {
-      dataComplete = list.reversed.map((e) {
-          double quote = e.quotationValue ?? 0; 
-          return [quote, DateTime.fromMillisecondsSinceEpoch(int.parse(e.dataTrading!) * 1000)];
-      }).toList();
-
-      maxX = dataComplete.length.toDouble();
-      maxY = 0;
-      minY = double.infinity;
-
-      for (var item in dataComplete) {
-        maxY = item[0] > maxY ? item[0] : maxY;
-        minY = item[0] < minY ? item[0] : minY;
-      }
-
-      for (int i = 0; i < dataComplete.length; i++) {
-        dataChart.add(FlSpot(
-          i.toDouble(),
-          dataComplete[i][0],
-        ));
-      }
-    }
-
-    if(dataComplete.length > 0) {
-      loaded.value = true;
-    }
-  }
 
   LineChartData getChartData() {
     return LineChartData(
@@ -64,19 +16,19 @@ class TradingChartPage extends GetView<TradingController> {
       titlesData: FlTitlesData(show: false),
       borderData: FlBorderData(show: false),
       minX: 0,
-      maxX: maxX,
-      minY: minY,
-      maxY: maxY,
+      maxX: controller.maxX,
+      minY: controller.minY,
+      maxY: controller.maxY,
       lineBarsData: [
         LineChartBarData(
-          spots: dataChart,
+          spots: controller.dataChart,
           isCurved: true,
-          colors: colors,
+          colors: controller.colors,
           barWidth: 1,
           dotData: FlDotData(show: true),
           belowBarData: BarAreaData(
             show: true,  
-            colors: colors.map((color) => color.withOpacity(0.15)).toList(), 
+            colors: controller.colors.map((color) => color.withOpacity(0.15)).toList(), 
           ),
         ),
       ],
@@ -85,9 +37,9 @@ class TradingChartPage extends GetView<TradingController> {
           tooltipBgColor: Color(0xFF343434),
           getTooltipItems: (data) {
             return data.map((item) {
-              final date = getDate(item.spotIndex);
+              final date = controller.getDate(item.spotIndex);
               return LineTooltipItem(
-                real.format(item.y),
+                controller.real.format(item.y),
                 TextStyle(
                   color: Colors.black,
                   fontSize: 15,
@@ -108,19 +60,13 @@ class TradingChartPage extends GetView<TradingController> {
         ),
       ),
     );
-  }
-
-   getDate(int index) {
-    DateTime date = dataComplete[index][1];
-    return DateFormat('dd/MM/y').format(date);
-  }
- 
+  } 
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size; 
-    real = NumberFormat.currency(locale: locale['locale'], name: locale['name']);
-    setDados(); 
+    controller.real = NumberFormat.currency(locale: controller.locale['locale'], name: controller.locale['name']);
+    controller.setDados(); 
 
     return controller.obx((state) {
       return Scaffold(
@@ -147,7 +93,7 @@ class TradingChartPage extends GetView<TradingController> {
                     Padding(
                       padding: const EdgeInsets.only(top: 80),
                       child: ValueListenableBuilder(
-                        valueListenable: loaded,
+                        valueListenable: controller.loaded,
                         builder: (context, bool isLoaded, _) {
                           return (isLoaded)
                               ? LineChart(
@@ -162,8 +108,8 @@ class TradingChartPage extends GetView<TradingController> {
                     ],
                   ),
                 ),
+              ),
             ),
-          ),
           ),
         );
       }
