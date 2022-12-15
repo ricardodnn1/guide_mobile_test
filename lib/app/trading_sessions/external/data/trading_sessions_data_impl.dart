@@ -5,7 +5,7 @@ import 'package:guidemobile/app/trading_sessions/infra/data/trading_sessions_dat
 import 'package:guidemobile/app/trading_sessions/infra/models/trading_sessions_model.dart';
 import 'package:guidemobile/shared/constants/endpoint.dart';
 
-class TradingSessionsDataImpl extends ITradingSessionsData {
+class TradingSessionsDataImpl implements ITradingSessionsData {
   
   final Dio _dio;
 
