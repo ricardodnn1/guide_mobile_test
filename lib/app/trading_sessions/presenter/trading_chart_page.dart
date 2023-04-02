@@ -8,8 +8,6 @@ import 'package:guidemobile/app/trading_sessions/presenter/controller/trading_co
 import 'package:intl/intl.dart';
 
 class TradingChartPage extends GetView<TradingController> {
-  
-
   LineChartData getChartData() {
     return LineChartData(
       gridData: FlGridData(show: true),
@@ -27,8 +25,10 @@ class TradingChartPage extends GetView<TradingController> {
           barWidth: 1,
           dotData: FlDotData(show: true),
           belowBarData: BarAreaData(
-            show: true,  
-            colors: controller.colors.map((color) => color.withOpacity(0.15)).toList(), 
+            show: true,
+            colors: controller.colors
+                .map((color) => color.withOpacity(0.15))
+                .toList(),
           ),
         ),
       ],
@@ -60,47 +60,43 @@ class TradingChartPage extends GetView<TradingController> {
         ),
       ),
     );
-  } 
+  }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size; 
-    controller.real = NumberFormat.currency(locale: controller.locale['locale'], name: controller.locale['name']);
-    controller.setDados(); 
+    final size = MediaQuery.of(context).size;
+    controller.real = NumberFormat.currency(
+        locale: controller.locale['locale'], name: controller.locale['name']);
+    controller.setDados();
 
-    return controller.obx((state) {
-      return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: const Text("Resultado da variação"), 
-        ),
-        body: Container(
-          height: size.height,
-          color: Colors.grey,
-          child: Center(
-            child: SizedBox(
-              height: size.height / 1.5,
-              child: AspectRatio(
-                aspectRatio: 2,
-                child: Stack(
-                  children: [
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: const  [],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 80),
-                      child: ValueListenableBuilder(
-                        valueListenable: controller.loaded,
-                        builder: (context, bool isLoaded, _) {
-                          return (isLoaded)
-                              ? LineChart(
-                                  getChartData(),
-                                )
-                              : const Center(
-                                  child: CircularProgressIndicator(),
+    return controller.obx(
+      (state) {
+        return Scaffold(
+          backgroundColor: Colors.grey,
+          appBar: AppBar(
+            backgroundColor: Colors.black,
+            title: const Text("Resultado da variação"),
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(
+                height: size.height / 1.5,
+                child: AspectRatio(
+                  aspectRatio: 2,
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 80),
+                        child: ValueListenableBuilder(
+                          valueListenable: controller.loaded,
+                          builder: (context, bool isLoaded, _) {
+                            return (isLoaded)
+                                ? LineChart(
+                                    getChartData(),
+                                  )
+                                : const Center(
+                                    child: CircularProgressIndicator(),
                                   );
                           },
                         ),
@@ -109,10 +105,10 @@ class TradingChartPage extends GetView<TradingController> {
                   ),
                 ),
               ),
-            ),
+            ],
           ),
         );
-      }
+      },
     );
   }
-} 
+}

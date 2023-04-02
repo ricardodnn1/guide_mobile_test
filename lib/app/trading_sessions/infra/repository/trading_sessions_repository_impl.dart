@@ -17,7 +17,7 @@ class TradingSessionsRepositoryImpl implements ITradingSessionsRepository {
   @override
   Future<Either<Failure, List<TradingSessionsModel>>> getAllTraiding() async { 
     try {
-      var list =  await dataSource.getAllTraiding();
+      var list = await dataSource.getAllTraiding();
       return Right(list);
     } catch(e) {
       return Left(Failure(statusCode: e.hashCode, message: "Error trying to load list"));

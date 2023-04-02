@@ -6,8 +6,6 @@ class TradingSessionsEntity extends Equatable {
 
     const TradingSessionsEntity({required this.dataTrading, required this.quotationValue});
     
-      @override 
-      List<Object?> get props => [dataTrading, quotationValue];
-
-
+    @override 
+    List<Object?> get props => [dataTrading, quotationValue];
 }
